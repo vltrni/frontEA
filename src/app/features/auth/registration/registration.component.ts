@@ -17,23 +17,29 @@ export class RegistrationComponent {
   accessType = '';
   successMessage = '';
   errorMessage = '';
+  invitationCode = '';
+
 
   constructor(private http: HttpClient, private router: Router) {}
 
   onRegister() {
-    const newUser = {
+    const newUser: any = {
       username: this.username,
       password: this.password,
       role: this.role,
       accessType: this.accessType
     };
 
+    // Aggiungi il codice di invito solo se organizer
+    if (this.role === 'organizer') {
+      newUser.invitationCode = this.invitationCode;
+    }
+
     this.http.post('http://localhost:8080/api/users', newUser).subscribe({
       next: () => {
         this.successMessage = 'Registrazione avvenuta con successo!';
         this.errorMessage = '';
-        // Eventuale redirect dopo qualche secondo
-        this.router.navigate(['/auth'])
+        this.router.navigate(['/auth']);
       },
       error: (err) => {
         console.error(err);
@@ -42,4 +48,5 @@ export class RegistrationComponent {
       }
     });
   }
+
 }
