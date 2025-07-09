@@ -1,0 +1,32 @@
+<h2>Registrati</h2>
+
+<form (ngSubmit)="onRegister()" #registrationForm="ngForm">
+  <div>
+    <label for="username">Username:</label>
+    <input type="text" id="username" [(ngModel)]="username" name="username" required />
+  </div>
+
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" [(ngModel)]="password" name="password" required />
+  </div>
+
+  <div>
+    <label for="role">Ruolo:</label>
+    <input type="role" id="role" [(ngModel)]="role" name="role" required />
+  </div>
+
+  <div>
+    <label for="accessType">Access Type:</label>
+    <select id="accessType" [(ngModel)]="accessType" name="accessType" required>
+      <option value="" disabled selected>Seleziona accesso</option>
+      <option value="public">Public</option>
+      <option value="private">Private</option>
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="registrationForm.invalid">Registrati</button>
+</form>
+
+<p *ngIf="successMessage" style="color: green;">{{ successMessage }}</p>
+<p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>

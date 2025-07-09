@@ -1,0 +1,32 @@
+<h2>Accedi</h2>
+
+<form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+  <div>
+    <label for="username">Username:</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      [(ngModel)]="username"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      [(ngModel)]="password"
+      required
+    />
+  </div>
+
+  <button type="submit" [disabled]="loginForm.invalid">Login</button>
+  <p *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</p>
+</form>
+<!-- Pulsante visibile solo in caso di errore -->
+<button *ngIf="errorMessage" (click)="goToRegister()">Registrati</button>
+
+
